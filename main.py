@@ -21,8 +21,8 @@ def main():
             workout_number = int(input("Choose a workout to execute: ")) - 1
             if workout_number >= 0 and workout_number < len(workouts):
                 workouts[workout_number].execute_workout()
-            elif user_input == "3":
-                show_workout_stats(workouts)
+        elif user_input == "3":
+            show_workout_stats(workouts)
         elif user_input == "4":
             filename = input("Enter filename (or leave empty for 'workout_stats.csv'): ")
             if filename == "":
