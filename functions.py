@@ -39,7 +39,11 @@ def save_workouts(workouts):
         pickle.dump(workouts, f)
 
 def load_workouts():
-
+     try:
+        with open('workouts.pkl', 'rb') as f:
+            return pickle.load(f)
+    except FileNotFoundError:
+        return []
 
 def export_stats_to_csv(workouts, filename="workout_stats.csv"):
 
