@@ -55,3 +55,9 @@ class Workout:
             if all_sets_successful:
                 print(f"You have successfully completed {exercise.name}! Weight will be increased by {exercise.weight_increase} for next workout.")
                 exercise.increase_weight()
+        
+        def show_stats(self):
+        for exercise in self.exercises:
+            print(f"Exercise: {exercise.name}")
+            print(f"Max Weight Lifted: {exercise.max_weight}KG")
+            print(f"Date Max Weight Lifted: {exercise.date_max_weight}\n")
