@@ -9,6 +9,12 @@ class Exercise:
         self.max_weight = weight
         self.date_max_weight = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+        def increase_weight(self):
+        self.weight += self.weight_increase
+        if self.weight > self.max_weight:
+            self.max_weight = self.weight
+            self.date_max_weight = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 class Workout:
     def __init__(self, name, exercises):
         self.name = name
