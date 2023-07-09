@@ -46,4 +46,16 @@ def load_workouts():
         return []
 
 def export_stats_to_csv(workouts, filename="workout_stats.csv"):
+    with open(filename, 'w', newline='') as csvfile:
+        fieldnames = ['Workout', 'Exercise', 'Max Weight Lifted', 'Date Max Weight Lifted']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
+        writer.writeheader()
+        for workout in workouts:
+            for exercise in workout.exercises:
+                writer.writerow({
+                    'Workout': workout.name, 
+                    'Exercise': exercise.name, 
+                    'Max Weight Lifted': exercise.max_weight, 
+                    'Date Max Weight Lifted': exercise.date_max_weight
+                })
