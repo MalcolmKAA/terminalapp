@@ -15,6 +15,11 @@ class Exercise:
             self.max_weight = self.weight
             self.date_max_weight = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+        def decrease_weight(self, decrease_amount):
+        self.weight -= decrease_amount
+        if self.weight < 0:
+            self.weight = 0
+
 class Workout:
     def __init__(self, name, exercises):
         self.name = name
