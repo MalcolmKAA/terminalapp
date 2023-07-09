@@ -1,3 +1,6 @@
+import datetime
+from time import sleep
+
 class Exercise:
     def __init__(self, name, sets, reps, weight, rest_time, weight_increase):
         self.name = name
@@ -24,3 +27,6 @@ class Workout:
     def __init__(self, name, exercises):
         self.name = name
         self.exercises = exercises
+
+    def add_exercise(self, exercise):
+        self.exercises.append(exercise)
