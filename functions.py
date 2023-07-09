@@ -35,7 +35,8 @@ def show_workout_stats(workouts):
             selected_workout.show_stats()
 
 def save_workouts(workouts):
-
+    with open('workouts.pkl', 'wb') as f:
+        pickle.dump(workouts, f)
 
 def load_workouts():
 
