@@ -22,7 +22,17 @@ def create_workout():
     return Workout(name, exercises)
 
 def show_workout_stats(workouts):
+    while True:
+        for i, workout in enumerate(workouts, 1):
+            print(f"{i}. {workout.name}")
+        print("0. Back to main menu")
 
+        user_input = input("Enter the number of the workout to view its stats: ")
+        if user_input == "0":
+            break
+        else:
+            selected_workout = workouts[int(user_input) - 1]
+            selected_workout.show_stats()
 
 def save_workouts(workouts):
 
