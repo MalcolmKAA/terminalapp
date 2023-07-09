@@ -59,3 +59,17 @@ def export_stats_to_csv(workouts, filename="workout_stats.csv"):
                     'Max Weight Lifted': exercise.max_weight, 
                     'Date Max Weight Lifted': exercise.date_max_weight
                 })
+def delete_workout(workouts):
+    if not workouts:
+        print("No workouts found.")
+        return workouts
+    for i, workout in enumerate(workouts):
+        print(f"{i + 1}. {workout.name}")
+    workout_number = int(input("Choose a workout to delete: ")) - 1
+    if workout_number >= 0 and workout_number < len(workouts):
+        del workouts[workout_number]
+        print("Workout deleted successfully.")
+    else:
+        print("Invalid option. Please try again.")
+    return workouts
+
