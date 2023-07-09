@@ -3,7 +3,7 @@ import csv
 from classes import Exercise, Workout
 
 def create_exercise():
-  name = input("Enter exercise name: ")
+    name = input("Enter exercise name: ")
     sets = int(input("Enter number of sets: "))
     reps = int(input("Enter number of reps: "))
     weight = float(input("Enter weight: "))
@@ -12,7 +12,7 @@ def create_exercise():
     return Exercise(name, sets, reps, weight, rest_time, weight_increase)
 
 def create_workout():
- name = input("Enter workout name: ")
+    name = input("Enter workout name: ")
     exercises = []
     while True:
         exercises.append(create_exercise())
@@ -39,7 +39,7 @@ def save_workouts(workouts):
         pickle.dump(workouts, f)
 
 def load_workouts():
-     try:
+    try:
         with open('workouts.pkl', 'rb') as f:
             return pickle.load(f)
     except FileNotFoundError:

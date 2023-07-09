@@ -13,15 +13,15 @@ class Exercise:
         self.date_max_weight = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         def increase_weight(self):
-        self.weight += self.weight_increase
-        if self.weight > self.max_weight:
-            self.max_weight = self.weight
-            self.date_max_weight = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            self.weight += self.weight_increase
+            if self.weight > self.max_weight:
+                self.max_weight = self.weight
+                self.date_max_weight = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         def decrease_weight(self, decrease_amount):
-        self.weight -= decrease_amount
-        if self.weight < 0:
-            self.weight = 0
+            self.weight -= decrease_amount
+            if self.weight < 0:
+                self.weight = 0
 
 class Workout:
     def __init__(self, name, exercises):
@@ -57,7 +57,7 @@ class Workout:
                 exercise.increase_weight()
         
         def show_stats(self):
-        for exercise in self.exercises:
-            print(f"Exercise: {exercise.name}")
-            print(f"Max Weight Lifted: {exercise.max_weight}KG")
-            print(f"Date Max Weight Lifted: {exercise.date_max_weight}\n")
+            for exercise in self.exercises:
+                print(f"Exercise: {exercise.name}")
+                print(f"Max Weight Lifted: {exercise.max_weight}KG")
+                print(f"Date Max Weight Lifted: {exercise.date_max_weight}\n")
