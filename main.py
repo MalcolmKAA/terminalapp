@@ -1,5 +1,5 @@
 from classes import Exercise, Workout
-from functions import create_exercise, create_workout, show_workout_stats, save_workouts, load_workouts, export_stats_to_csv
+from functions import create_exercise, create_workout, show_workout_stats, save_workouts, load_workouts, export_stats_to_csv, delete_workout
 
 def main():
     workouts = load_workouts()
@@ -8,7 +8,8 @@ def main():
         print("2. Execute an existing workout")
         print("3. Stats")
         print("4. Export stats to CSV")
-        print("5. Save and exit")
+        print("5. Delete a workout")
+        print("6. Save and exit")
         user_input = input("Choose an option: ")
         if user_input == "1":
             workouts.append(create_workout())
@@ -29,11 +30,14 @@ def main():
                 filename = "workout_stats.csv"
             export_stats_to_csv(workouts, filename)
         elif user_input == "5":
+            workouts = delete_workout(workouts)
+        elif user_input == "6":
             print("Saving and exiting...")
             save_workouts(workouts)
             break
         else:
             print("Invalid option. Please try again.")
+
 
 if __name__ == "__main__":
     main()

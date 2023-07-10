@@ -65,11 +65,15 @@ def delete_workout(workouts):
         return workouts
     for i, workout in enumerate(workouts):
         print(f"{i + 1}. {workout.name}")
-    workout_number = int(input("Choose a workout to delete: ")) - 1
-    if workout_number >= 0 and workout_number < len(workouts):
-        del workouts[workout_number]
+    print("0. Go back")
+    workout_number = int(input("Choose a workout to delete or 0 to go back: ")) 
+    if workout_number > 0 and workout_number <= len(workouts):
+        del workouts[workout_number-1]
         print("Workout deleted successfully.")
+    elif workout_number == 0:
+        print("Operation cancelled.")
     else:
         print("Invalid option. Please try again.")
     return workouts
+
 
