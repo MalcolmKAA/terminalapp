@@ -13,8 +13,8 @@ def create_exercise():
                 continue
 
             reps = int(input("Enter number of reps: "))
-            if reps <= 0:
-                print("Number of reps must be greater than 0.")
+            if reps < 0:
+                print("Number of reps must 0 or greater.")
                 continue
 
             weight = float(input("Enter weight: "))
