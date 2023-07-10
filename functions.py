@@ -49,17 +49,31 @@ def create_workout():
     return Workout(name, exercises)
 
 def show_workout_stats(workouts):
+    if not workouts:
+        print("No workouts found.")
+        return
+
     while True:
-        for i, workout in enumerate(workouts, 1):
-            print(f"{i}. {workout.name}")
         print("0. Back to main menu")
+        for i, workout in enumerate(workouts):
+            print(f"{i + 1}. {workout.name}")
 
         user_input = input("Enter the number of the workout to view its stats: ")
-        if user_input == "0":
-            break
-        else:
-            selected_workout = workouts[int(user_input) - 1]
+        try:
+            user_input = int(user_input)
+        except ValueError:
+            print("Invalid option. Please enter a number.")
+            continue
+
+        if user_input == 0:
+            return
+        elif user_input > 0 and user_input <= len(workouts):
+            selected_workout = workouts[user_input - 1]
             selected_workout.show_stats()
+            return
+        else:
+            print("Invalid option. Please try again.")
+
 
 def save_workouts(workouts):
     with open('workouts.pkl', 'wb') as f:
