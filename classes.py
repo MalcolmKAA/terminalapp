@@ -1,9 +1,9 @@
 from time import sleep
 from datetime import date
-
+# Exception class to signal an early exit from a workout
 class ExitWorkout(Exception):
     pass
-
+# Represents an individual exercise in a workout, with associated data
 class Exercise:
     def __init__(self, name, sets, reps, weight, rest_time, weight_increase):
         self.name = name
@@ -14,26 +14,26 @@ class Exercise:
         self.weight_increase = weight_increase
         self.max_weight = weight
         self.date_max_weight = date.today().strftime("%d/%m/%Y")
-
+    # Method to increase the weight of the exercise
     def increase_weight(self):
         self.weight += self.weight_increase
         if self.weight > self.max_weight:
             self.max_weight = self.weight
             self.date_max_weight = date.today().strftime("%d/%m/%Y")
-
+    # Method to decrease the weight of the exercise
     def decrease_weight(self, decrease_amount):
         self.weight -= decrease_amount
         if self.weight < 0:
             self.weight = 0
-
+# Represents a full workout, containing a list of exercises
 class Workout:
     def __init__(self, name, exercises):
         self.name = name
         self.exercises = exercises
-
+    # Method to add an exercise to the workout
     def add_exercise(self, exercise):
         self.exercises.append(exercise)
-
+    # Method to execute a specific exercise
     def execute_exercise(self, exercise):
         any_sets_failed = False
         set_number = 1
@@ -71,7 +71,7 @@ class Workout:
             else:
                 print("Invalid input. Please try again.")
         return not any_sets_failed
-
+    # Method to execute the entire workout
     def execute_workout(self):
         for i, exercise in enumerate(self.exercises):
             print(f"Starting {exercise.name}...")
@@ -84,7 +84,7 @@ class Workout:
                 exercise.increase_weight()
             if i == len(self.exercises) - 1:
                 print("Nice work, your workout is complete!")
-
+    # Method to show all the stats of all exercises in the workout
     def show_stats(self):
         for exercise in self.exercises:
             print(f"Exercise: {exercise.name}")

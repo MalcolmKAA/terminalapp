@@ -1,15 +1,14 @@
 import pickle
 import csv
 from classes import Exercise, Workout
-
+# Function to check if a given value can be converted to float
 def is_float(value):
     try:
         float(value)
         return True
     except ValueError:
         return False
-
-
+# Function to create an Exercise instance after getting input from the user
 def create_exercise():
     while True:
         try:
@@ -48,7 +47,7 @@ def create_exercise():
             return Exercise(name, sets, reps, weight, rest_time, weight_increase)
         except ValueError:
             print("Invalid input. Please try again.")
-
+# Function to create a Workout instance after getting input from the user
 def create_workout():
     name = input("Enter workout name: ")
     exercises = []
@@ -58,7 +57,7 @@ def create_workout():
         if add_more.lower() != "yes":
             break
     return Workout(name, exercises)
-
+# Function to show the stats of a specific workout after getting input from the user
 def show_workout_stats(workouts):
     if not workouts:
         print("No workouts found.")
@@ -84,19 +83,18 @@ def show_workout_stats(workouts):
             return
         else:
             print("Invalid option. Please try again.")
-
-
+# Function to save the list of workouts to a pickle file
 def save_workouts(workouts):
     with open('workouts.pkl', 'wb') as f:
         pickle.dump(workouts, f)
-
+# Function to load the list of workouts to a pickle file
 def load_workouts():
     try:
         with open('workouts.pkl', 'rb') as f:
             return pickle.load(f)
     except FileNotFoundError:
         return []
-
+# Function to export the stats of all workouts to a CSV file
 def export_stats_to_csv(workouts, filename="workout_stats.csv"):
     with open(filename, 'w', newline='') as csvfile:
         fieldnames = ['Workout', 'Exercise', 'Max Weight Lifted', 'Date Max Weight Lifted']
@@ -111,6 +109,7 @@ def export_stats_to_csv(workouts, filename="workout_stats.csv"):
                     'Max Weight Lifted': exercise.max_weight, 
                     'Date Max Weight Lifted': exercise.date_max_weight
                 })
+# Function to delete a specific workout after getting input from the user               
 def delete_workout(workouts):
     if not workouts:
         print("No workouts found.")
