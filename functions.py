@@ -4,12 +4,39 @@ from classes import Exercise, Workout
 
 def create_exercise():
     name = input("Enter exercise name: ")
-    sets = int(input("Enter number of sets: "))
-    reps = int(input("Enter number of reps: "))
-    weight = float(input("Enter weight: "))
-    rest_time = int(input("Enter rest time between sets in seconds: "))
-    weight_increase = float(input("Enter weight increase after successful completion: "))
-    return Exercise(name, sets, reps, weight, rest_time, weight_increase)
+
+    while True:
+        try:
+            sets = int(input("Enter number of sets: "))
+            if sets <= 0:
+                print("Number of sets must be greater than 0.")
+                continue
+
+            reps = int(input("Enter number of reps: "))
+            if reps <= 0:
+                print("Number of reps must be greater than 0.")
+                continue
+
+            weight = float(input("Enter weight: "))
+            if weight <= 0:
+                print("Weight must be greater than 0.")
+                continue
+
+            rest_time = int(input("Enter rest time between sets in seconds: "))
+            if rest_time < 0:
+                print("Rest time must be 0 or greater.")
+                continue
+
+            weight_increase = float(input("Enter weight increase after successful completion: "))
+            if weight_increase < 0:
+                print("Weight increase must be 0 or greater.")
+                continue
+
+            return Exercise(name, sets, reps, weight, rest_time, weight_increase)
+
+        except ValueError:
+            print("Invalid input. Please try again.")
+
 
 def create_workout():
     name = input("Enter workout name: ")
@@ -63,17 +90,31 @@ def delete_workout(workouts):
     if not workouts:
         print("No workouts found.")
         return workouts
-    for i, workout in enumerate(workouts):
-        print(f"{i + 1}. {workout.name}")
-    print("0. Go back")
-    workout_number = int(input("Choose a workout to delete or 0 to go back: ")) 
-    if workout_number > 0 and workout_number <= len(workouts):
-        del workouts[workout_number-1]
-        print("Workout deleted successfully.")
-    elif workout_number == 0:
-        print("Operation cancelled.")
-    else:
-        print("Invalid option. Please try again.")
+
+    while True:
+        for i, workout in enumerate(workouts):
+            print(f"{i + 1}. {workout.name}")
+        print("0. Go back")
+
+        try:
+            workout_number = int(input("Choose a workout to delete or 0 to go back: "))
+        except ValueError:
+            print("Invalid option. Please enter a number.")
+            continue
+
+        if workout_number > 0 and workout_number <= len(workouts):
+            del workouts[workout_number-1]
+            print("Workout deleted successfully.")
+            break
+        elif workout_number == 0:
+            print("Operation cancelled.")
+            break
+        else:
+            print("Invalid option. Please try again.")
+
     return workouts
+
+
+    
 
 
