@@ -2,8 +2,7 @@
 
 echo "Setting up and running the project..."
 
-# Check Python version, install if necessary
-# You can adjust the required version as per your project
+# Check Python version
 required_python_version=3.8
 python_version=$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)
 if [ $python_version != $required_python_version ]
@@ -26,7 +25,7 @@ python3 ./test.py
 chmod +x main.py
 
 # Run main.py
-echo "Running weightlifting program program..."
+echo "Running weightlifting program..."
 python3 ./main.py
 
 

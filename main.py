@@ -1,6 +1,6 @@
 from classes import Exercise, Workout
 from functions import create_exercise, create_workout, show_workout_stats, save_workouts, load_workouts, export_stats_to_csv, delete_workout
-
+# main.py serves as the application's central control point
 def main():
     workouts = load_workouts()
     while True:
