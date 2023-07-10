@@ -47,12 +47,23 @@ class Workout:
                 set_number += 1
             elif user_input == "2":
                 any_sets_failed = True
-                print(f"You failed the set. Would you like to decrease weight? ")
-                user_input = input("Press 1 for yes, 2 for no: ")
-                if user_input == "1":
-                    decrease_amount = int(input("Enter decrease amount: "))
-                    exercise.decrease_weight(decrease_amount)
-                    print(f"Weight has been decreased by {decrease_amount}. New weight is {exercise.weight}.")
+                while True:
+                    print(f"You failed the set. Would you like to decrease weight? ")
+                    user_input = input("Press 1 for yes, 2 for no: ")
+                    if user_input == "1":
+                        while True:
+                            try:
+                                decrease_amount = float(input("Enter decrease amount: "))
+                                exercise.decrease_weight(decrease_amount)
+                                print(f"Weight has been decreased by {decrease_amount}. New weight is {exercise.weight}.")
+                                break
+                            except ValueError:
+                                print("Invalid input. Please enter a number.")
+                        break
+                    elif user_input == "2":
+                        break
+                    else:
+                        print("Invalid input. Please try again.")
                 set_number += 1
             elif user_input.lower() == "exit":
                 print("Exiting the workout...")
@@ -79,4 +90,5 @@ class Workout:
             print(f"Exercise: {exercise.name}")
             print(f"Max Weight Lifted: {exercise.max_weight}KG")
             print(f"Date Max Weight Lifted: {exercise.date_max_weight}\n")
+
 
