@@ -1,6 +1,9 @@
 import datetime
 from time import sleep
 
+class ExitWorkout(Exception):
+    pass
+
 class Exercise:
     def __init__(self, name, sets, reps, weight, rest_time, weight_increase):
         self.name = name
@@ -32,7 +35,6 @@ class Workout:
         self.exercises.append(exercise)
 
     def execute_exercise(self, exercise):
-        print(f"Starting {exercise.name}...")
         all_sets_successful = True
         for set_number in range(1, exercise.sets + 1):
             print(f"Set {set_number} of {exercise.sets}. {exercise.reps} reps at {exercise.weight}KG. Type 'exit' at anytime to leave the workout.")
@@ -48,23 +50,26 @@ class Workout:
                     decrease_amount = int(input("Enter decrease amount: "))
                     exercise.decrease_weight(decrease_amount)
                     print(f"Weight has been decreased by {decrease_amount}. New weight is {exercise.weight}.")
-                continue 
+                break
             elif user_input.lower() == "exit":
-                print("Exiting the workout...")
-                return False
+                raise ExitWorkout
             else:
                 print("Invalid input. Please try again.")
                 continue
         return all_sets_successful
 
     def execute_workout(self):
-        for exercise in self.exercises:
-            all_sets_successful = self.execute_exercise(exercise)
-            if all_sets_successful:
-                print(f"You have successfully completed {exercise.name}! Weight will be increased by {exercise.weight_increase} for next workout.")
-                exercise.increase_weight()
-            elif all_sets_successful is False:
-                continue 
+        try:
+            for exercise in self.exercises:
+                print(f"Starting {exercise.name}...")
+                all_sets_successful = self.execute_exercise(exercise)
+                if all_sets_successful:
+                    print(f"You have successfully completed {exercise.name}! Weight will be increased by {exercise.weight_increase} for next workout.")
+                    exercise.increase_weight()
+                elif all_sets_successful is False:
+                    break
+        except ExitWorkout:
+            print("Exiting the workout...")
 
     def show_stats(self):
         for exercise in self.exercises:
