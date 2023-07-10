@@ -2,41 +2,52 @@ import pickle
 import csv
 from classes import Exercise, Workout
 
-def create_exercise():
-    name = input("Enter exercise name: ")
+def is_float(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
 
+
+def create_exercise():
     while True:
         try:
-            sets = int(input("Enter number of sets: "))
-            if sets <= 0:
-                print("Number of sets must be greater than 0.")
-                continue
-
-            reps = int(input("Enter number of reps: "))
-            if reps < 0:
-                print("Number of reps must 0 or greater.")
-                continue
-
-            weight = float(input("Enter weight: "))
-            if weight <= 0:
-                print("Weight must be greater than 0.")
-                continue
-
-            rest_time = int(input("Enter rest time between sets in seconds: "))
-            if rest_time < 0:
-                print("Rest time must be 0 or greater.")
-                continue
-
-            weight_increase = float(input("Enter weight increase after successful completion: "))
-            if weight_increase < 0:
-                print("Weight increase must be 0 or greater.")
-                continue
-
+            name = input("Enter exercise name: ")
+            
+            sets = input("Enter number of sets: ")
+            while not sets.isdigit():
+                print("Invalid input. Please try again.")
+                sets = input("Enter number of sets: ")
+            sets = int(sets)
+            
+            reps = input("Enter number of reps: ")
+            while not reps.isdigit():
+                print("Invalid input. Please try again.")
+                reps = input("Enter number of reps: ")
+            reps = int(reps)
+            
+            weight = input("Enter weight: ")
+            while not is_float(weight):
+                print("Invalid input. Please try again.")
+                weight = input("Enter weight: ")
+            weight = float(weight)
+            
+            rest_time = input("Enter rest time between sets in seconds: ")
+            while not rest_time.isdigit():
+                print("Invalid input. Please try again.")
+                rest_time = input("Enter rest time between sets in seconds: ")
+            rest_time = int(rest_time)
+            
+            weight_increase = input("Enter weight increase after successful completion: ")
+            while not is_float(weight_increase):
+                print("Invalid input. Please try again.")
+                weight_increase = input("Enter weight increase after successful completion: ")
+            weight_increase = float(weight_increase)
+            
             return Exercise(name, sets, reps, weight, rest_time, weight_increase)
-
         except ValueError:
             print("Invalid input. Please try again.")
-
 
 def create_workout():
     name = input("Enter workout name: ")
